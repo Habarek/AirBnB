@@ -40,14 +40,9 @@ const SignInScreen = ({ navigation }) => {
           Sign in
         </Text>
       </TouchableHighlight>
-      <Text
-        style={styles.btnRegister}
-        onPress={() => {
-          navigation.navigate("SignUp");
-        }}
-      >
-        No account ? Register
-      </Text>
+      <TouchableHighlight onPress={() => navigation.navigate("SignUp")}>
+        <Text style={styles.btnRegister}>No account ? Register</Text>
+      </TouchableHighlight>
     </View>
   );
 };
