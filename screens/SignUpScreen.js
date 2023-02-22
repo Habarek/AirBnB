@@ -57,8 +57,17 @@ const SignUpScreen = () => {
       // lors de ma reqête je demande si token existe, si il existe je le stock dans "token"
       if (response.data) {
         console.log(response.data);
+        setUserToken(response.data.token);
+        alert("inscription réussi");
       }
-    } catch (error) {}
+    } catch (error) {
+      if (error === "This email already has an account.") {
+        setErrorMessage("Cet e-mail a déjà un compte.");
+      }
+      if (error === "This username already has an account.") {
+        setErrorMessage("Ce nom a déjà un compte.");
+      }
+    }
   };
 
   return (
@@ -110,8 +119,8 @@ const SignUpScreen = () => {
           setConfirmPassword(input);
         }}
       />
-      <Text>{errorMessage}</Text>
-      <TouchableHighlight style={styles.btnSignUp} onPress={() => fetchData()}>
+      <Text style={{ color: "red" }}>{errorMessage}</Text>
+      <TouchableHighlight style={styles.btnSignUp} onPress={() => fetchData}>
         <Text>Sign up</Text>
       </TouchableHighlight>
       <TouchableHighlight
@@ -119,7 +128,21 @@ const SignUpScreen = () => {
           navigation.navigate("SignIn");
         }}
       >
-        <Text style={styles.btnRegister}>Already have an account? Sign in</Text>
+        {/* <Text style={styles.btnRegister}>Already have an account? Sign in</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("Home");
+        }}
+      >
+        <Text style={styles.btnRegister}>redirection de la page Home</Text>
+      </TouchableHighlight>
+      <TouchableHighlight
+        onPress={() => {
+          navigation.navigate("Room");
+        }}
+      > */}
+        <Text style={styles.btnRegister}>redirection de la page Room</Text>
       </TouchableHighlight>
     </View>
   );
