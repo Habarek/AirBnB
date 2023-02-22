@@ -48,18 +48,21 @@ const SignInScreen = () => {
         // je stock la valeur du token dans mon composant setUserToken
         setUserToken(response.data.token);
         // je lance une alerte pour dire que tout est bon
-        alert("inscription réussi");
-        navigation.navigate("Home");
+        alert("connection réussi");
+        // navigation.navigate("Home");
       }
       // En cas d'rreur
     } catch (error) {
       // Chercher dans console.log l'erreur (regarder le statut,le messsage)
-      console.log("là =>", error.response.data);
-      // si la réponse de mon erreur est "This email already has an account."
-      if (error.response.data.error === "Unauthorized") {
-        // je stock ce message
-        setErrorMessage("votre email ou password est incorrect");
+      console.log("là =>", error.response);
+      if (error.response) {
+        setErrorMessage(error.response);
       }
+      // si la réponse de mon erreur est "This email already has an account."
+      // if (error.response.data === "Unauthorized") {
+      //   // je stock ce message
+      //   setErrorMessage("votre email ou password est incorrect");
+      // }
     }
   };
 
@@ -97,9 +100,9 @@ const SignInScreen = () => {
         </Text>
       </TouchableHighlight>
       <TouchableHighlight
-      // onPress={() => {
-      //   navigation.navigate("SignUp");
-      // }}
+        onPress={() => {
+          navigation.navigate("SignUp");
+        }}
       >
         <Text style={styles.btnRegister}>No account ? Register</Text>
       </TouchableHighlight>
