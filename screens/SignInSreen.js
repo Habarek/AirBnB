@@ -13,7 +13,55 @@ import { useNavigation } from "@react-navigation/native";
 const SignInScreen = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+
   const navigation = useNavigation();
+
+  const login = async () => {
+    // Il faut mettres les conditions avant la requête
+    try {
+      // je défini setErrorMessage
+      setErrorMessage("");
+
+      // Si email,password, n'existent pas (n'est pas renseigné)
+      if (!email || !password) {
+        // Alors j'envoi ce méssage d'erreur
+        setErrorMessage("Veuillez remplir tout les champs");
+      }
+
+      const response = await axios.post(
+        "https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/user/log_in",
+        {
+          // ne pas mettre le deuxieme 'email' entres {} car
+          // on est en dehor du return qui veut dire qu'on est deja dans du JS, react comprendrais que c'est un objet
+
+          email: email,
+          password: password,
+        }
+      );
+
+      // lors de ma reqête je demande si token existe, si il existe je le stock dans "token"
+      // Si response.data existe alor
+      if (response.data) {
+        // Je regarde mon console.log et cherche le chemin du token
+        console.log("ici =>", response.data);
+        // je stock la valeur du token dans mon composant setUserToken
+        setUserToken(response.data.token);
+        // je lance une alerte pour dire que tout est bon
+        alert("inscription réussi");
+        navigation.navigate("Home");
+      }
+      // En cas d'rreur
+    } catch (error) {
+      // Chercher dans console.log l'erreur (regarder le statut,le messsage)
+      console.log("là =>", error.response.data);
+      // si la réponse de mon erreur est "This email already has an account."
+      if (error.response.data.error === "Unauthorized") {
+        // je stock ce message
+        setErrorMessage("votre email ou password est incorrect");
+      }
+    }
+  };
 
   return (
     <View>
@@ -37,21 +85,21 @@ const SignInScreen = () => {
         }}
         style={styles.inputPassword}
       />
-
+      <Text style={{ color: "red" }}>{errorMessage}</Text>
       <TouchableHighlight style={styles.btnSignin}>
         <Text
           style={styles.btnSigninText}
           onPress={() => {
-            alert("Connection!");
+            login();
           }}
         >
           Sign in
         </Text>
       </TouchableHighlight>
       <TouchableHighlight
-        onPress={() => {
-          navigation.navigate("SignUp");
-        }}
+      // onPress={() => {
+      //   navigation.navigate("SignUp");
+      // }}
       >
         <Text style={styles.btnRegister}>No account ? Register</Text>
       </TouchableHighlight>

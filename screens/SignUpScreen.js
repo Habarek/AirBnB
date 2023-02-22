@@ -55,17 +55,31 @@ const SignUpScreen = () => {
       );
 
       // lors de ma reqête je demande si token existe, si il existe je le stock dans "token"
+      // Si response.data existe alor
       if (response.data) {
-        console.log(response.data);
+        // Je regarde mon console.log et cherche le chemin du token
+        console.log("ici =>", response.data);
+        // je stock la valeur du token dans mon composant setUserToken
         setUserToken(response.data.token);
+        // je lance une alerte pour dire que tout est bon
         alert("inscription réussi");
+        navigation.navigate("SignIn");
       }
+      // En cas d'rreur
     } catch (error) {
-      if (error === "This email already has an account.") {
-        setErrorMessage("Cet e-mail a déjà un compte.");
+      // Chercher dans console.log l'erreur (regarder le statut,le messsage)
+      console.log("là =>", error.response.data);
+      // si la réponse de mon erreur est "This email already has an account."
+      if (error.response.data.error === "This email already has an account.") {
+        // je stock ce message
+        setErrorMessage("Cet email est déjà pris");
       }
-      if (error === "This username already has an account.") {
-        setErrorMessage("Ce nom a déjà un compte.");
+      // Si je reçoi ce méssage d'erreur
+      if (
+        error.response.data.error === "This username already has an account."
+      ) {
+        // je stock ce message
+        setErrorMessage("Cet Nom est déjà pris");
       }
     }
   };
@@ -119,8 +133,15 @@ const SignUpScreen = () => {
           setConfirmPassword(input);
         }}
       />
+      {/* si je reçcois un message d'erreur je l'affiche ici */}
       <Text style={{ color: "red" }}>{errorMessage}</Text>
-      <TouchableHighlight style={styles.btnSignUp} onPress={() => fetchData}>
+      {/* Lors de la pression sur le bouton 'Sign Up j'appel la fonction fetchData  */}
+      <TouchableHighlight
+        style={styles.btnSignUp}
+        onPress={() => {
+          fetchData();
+        }}
+      >
         <Text>Sign up</Text>
       </TouchableHighlight>
       <TouchableHighlight
@@ -128,9 +149,9 @@ const SignUpScreen = () => {
           navigation.navigate("SignIn");
         }}
       >
-        {/* <Text style={styles.btnRegister}>Already have an account? Sign in</Text>
+        <Text style={styles.btnRegister}>Already have an account? Sign in</Text>
       </TouchableHighlight>
-      <TouchableHighlight
+      {/* <TouchableHighlight
         onPress={() => {
           navigation.navigate("Home");
         }}
@@ -141,9 +162,9 @@ const SignUpScreen = () => {
         onPress={() => {
           navigation.navigate("Room");
         }}
-      > */}
+      > 
         <Text style={styles.btnRegister}>redirection de la page Room</Text>
-      </TouchableHighlight>
+      </TouchableHighlight> */}
     </View>
   );
 };
