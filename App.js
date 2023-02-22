@@ -31,13 +31,16 @@ export default function App() {
         {/* Toujour donné un name c'est comme un id il doir être unique */}
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Tab">
+        <Stack.Screen name="Home" component={HomeScreen} />
+        <Stack.Screen name="Room" component={RoomScreen} />
+
+        {/* <Stack.Screen name="Tab">
           {() => (
             <Tab.Navigator>
               <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
             </Tab.Navigator>
           )}
-        </Stack.Screen>
+        </Stack.Screen> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
@@ -49,3 +52,16 @@ export default function App() {
             <Tab.Screen name="Room" component={RoomScreen}></Tab.Screen>
   </Tab.Navigator> */
 }
+
+// {
+//    <Tab.Navigator>
+//               <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
+//               <Tab.Screen name="stack">
+//                 <Stack.Navigator>
+//                   <Stack.Screen name="ggdg" component={gergrz}/>
+
+//                 </Stack.Navigator>
+//               </Tab.Screen>
+
+// </Tab.Navigator>
+// }

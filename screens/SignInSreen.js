@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { useNavigation } from "@react-navigation/native";
+import axios from "axios";
 
 const SignInScreen = () => {
   const [email, setEmail] = useState("");
@@ -45,18 +46,17 @@ const SignInScreen = () => {
       if (response.data) {
         // Je regarde mon console.log et cherche le chemin du token
         console.log("ici =>", response.data);
-        // je stock la valeur du token dans mon composant setUserToken
-        setUserToken(response.data.token);
+
         // je lance une alerte pour dire que tout est bon
         alert("connection réussi");
-        // navigation.navigate("Home");
+        navigation.navigate("Home");
       }
       // En cas d'rreur
     } catch (error) {
       // Chercher dans console.log l'erreur (regarder le statut,le messsage)
-      console.log("là =>", error.response);
+      console.log("là =>", error);
       if (error.response) {
-        setErrorMessage(error.response);
+        setErrorMessage(error);
       }
       // si la réponse de mon erreur est "This email already has an account."
       // if (error.response.data === "Unauthorized") {
