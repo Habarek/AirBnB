@@ -11,17 +11,22 @@ const RoomScreen = ({ route }) => {
   useEffect(() => {
     const fetchRoom = async () => {
       try {
+        console.log("  🚀 🚀 🚀 🚀 🚀 🚀 🚀 🚀");
+
+        console.log(roomId);
+
         const response = await axios.get(
           `https://lereacteur-bootcamp-api.herokuapp.com/api/airbnb/rooms/${roomId}`
         );
-        console.log("trouver=>", response.data);
+        console.log("ça fonctionne=>", response.data);
+
         setRoom(response.data);
         setIsLoading(false);
       } catch (error) {
-        console.log("par ici=>", error);
+        console.log("par ici l'erreur=>", error);
       }
-      fetchRoom();
     };
+    fetchRoom();
   }, []);
 
   return isLoading === true ? (
@@ -29,6 +34,7 @@ const RoomScreen = ({ route }) => {
   ) : (
     <View style={styles.test1}>
       <Text>BIENVENUE SUR LA ROOM PAGE</Text>
+      <Image style={styles.logo} source={require("../image/logo2.jpg")} />
     </View>
   );
 };
@@ -37,5 +43,12 @@ export default RoomScreen;
 const styles = StyleSheet.create({
   test1: {
     backgroundColor: "green",
+  },
+  logo: {
+    justifyContent: "center",
+    alignItems: "center",
+    width: 50,
+    height: 50,
+    marginHorizontal: "43%",
   },
 });
