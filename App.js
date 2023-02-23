@@ -2,6 +2,7 @@
 
 //Import de KeyboardAwareScrollView afin d'éviter une superposition avec le clavier.
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import { useState } from "react";
 
 //  NavigationContainer permet d'avoir toute la navigation c'est comme Browser as Router dans routerDom
 import { NavigationContainer } from "@react-navigation/native";
@@ -29,9 +30,9 @@ export default function App() {
       <Stack.Navigator>
         {/* Stack.Screen Equivalent de Route */}
         {/* Toujour donné un name c'est comme un id il doir être unique */}
+        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
-        <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Room" component={RoomScreen} />
       </Stack.Navigator>
     </NavigationContainer>

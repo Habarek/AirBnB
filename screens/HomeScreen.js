@@ -41,7 +41,7 @@ const HomeScreen = () => {
       <Text>BIENVENUE SUR LA HOME PAGE</Text>
       <TouchableHighlight
         onPress={() => {
-          navigation.navigate("Room");
+          navigation.navigate("Room", id);
         }}
       >
         <Text>redirection de la page Room</Text>
@@ -51,10 +51,25 @@ const HomeScreen = () => {
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return (
-            <View>
-              (<Image style={styles.img} source={{ uri: item.photos[0].url }} />
-              ) (<Text>{item.title}</Text>)
-            </View>
+            <TouchableHighlight
+              onPress={() => {
+                navigation.navigate("Room", {
+                  roomId: item._id,
+                });
+              }}
+            >
+              <View>
+                <Image
+                  style={styles.img}
+                  source={{ uri: item.photos[0].url }}
+                />
+                <Text>{item.title}</Text>
+                <Image
+                  style={styles.imgprofil}
+                  source={{ uri: item.user.account.photo.url }}
+                />
+              </View>
+            </TouchableHighlight>
           );
         }}
       />
@@ -82,5 +97,10 @@ const styles = StyleSheet.create({
   img: {
     width: 400,
     height: 200,
+  },
+  imgprofil: {
+    width: 60,
+    height: 40,
+    borderRadius: 100,
   },
 });
