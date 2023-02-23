@@ -23,45 +23,17 @@ const Tab = createBottomTabNavigator();
 // Comme React RouterDOM
 export default function App() {
   return (
-    // Equivalent de Router
+    // NavigationContainer Equivalent de Router
     <NavigationContainer>
-      {/* Equivalent de ROUTES */}
+      {/* Stack.Navigator Equivalent de ROUTES */}
       <Stack.Navigator>
-        {/* Equivalent de Route */}
+        {/* Stack.Screen Equivalent de Route */}
         {/* Toujour donné un name c'est comme un id il doir être unique */}
         <Stack.Screen name="SignIn" component={SignInScreen} />
         <Stack.Screen name="SignUp" component={SignUpScreen} />
         <Stack.Screen name="Home" component={HomeScreen} />
         <Stack.Screen name="Room" component={RoomScreen} />
-
-        {/* <Stack.Screen name="Tab">
-          {() => (
-            <Tab.Navigator>
-              <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
-            </Tab.Navigator>
-          )}
-        </Stack.Screen> */}
       </Stack.Navigator>
     </NavigationContainer>
   );
 }
-
-{
-  /* <Tab.Navigator>
-            <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
-            <Tab.Screen name="Room" component={RoomScreen}></Tab.Screen>
-  </Tab.Navigator> */
-}
-
-// {
-//    <Tab.Navigator>
-//               <Tab.Screen name="Home" component={HomeScreen}></Tab.Screen>
-//               <Tab.Screen name="stack">
-//                 <Stack.Navigator>
-//                   <Stack.Screen name="ggdg" component={gergrz}/>
-
-//                 </Stack.Navigator>
-//               </Tab.Screen>
-
-// </Tab.Navigator>
-// }

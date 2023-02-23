@@ -54,7 +54,7 @@ const SignInScreen = () => {
       // En cas d'rreur
     } catch (error) {
       // Chercher dans console.log l'erreur (regarder le statut,le messsage)
-      console.log("là =>", error);
+      console.log("là =>", error.response);
       if (error.response) {
         setErrorMessage(error);
       }
