@@ -6,15 +6,18 @@ import {
   Image,
   FlatList,
   ActivityIndicator,
+  ImageBackground,
 } from "react-native";
-
+// useNavigation permet de transmettre des info entres screen
 import { useNavigation } from "@react-navigation/native";
 import axios from "axios";
 import { useState, useEffect } from "react";
 
 const HomeScreen = () => {
+  //  data pour stocker les info de la requête
   const [data, setData] = useState();
   const [isLoading, setIsLoading] = useState(true);
+  // activer la variable pour la navigation
   const navigation = useNavigation();
 
   useEffect(() => {
@@ -46,8 +49,11 @@ const HomeScreen = () => {
       >
         <Text>redirection de la page Room</Text>
       </TouchableHighlight>
+      {/* Flatlist permet de lister les element en forme de liste */}
       <FlatList
+        // data = à data de la constante qui contien la requête
         data={data}
+        // keyExtractor permet
         keyExtractor={(item) => item._id}
         renderItem={({ item }) => {
           return (
@@ -59,7 +65,7 @@ const HomeScreen = () => {
               }}
             >
               <View>
-                <Image
+                <ImageBackground
                   style={styles.img}
                   source={{ uri: item.photos[0].url }}
                 />
@@ -102,5 +108,9 @@ const styles = StyleSheet.create({
     width: 60,
     height: 40,
     borderRadius: 100,
+  },
+  map: {
+    width: 400,
+    height: 400,
   },
 });

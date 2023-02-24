@@ -16,6 +16,7 @@ import SignInScreen from "./screens/SignInSreen";
 import SignUpScreen from "./screens/SignUpScreen";
 import HomeScreen from "./screens/HomeScreen";
 import RoomScreen from "./screens/RoomScreen";
+import { ScrollView } from "react-native";
 
 // CREATION DE LA VARIABLE STACK et Tab QUI FAIT APPEL A LA FONCTION
 const Stack = createNativeStackNavigator();
